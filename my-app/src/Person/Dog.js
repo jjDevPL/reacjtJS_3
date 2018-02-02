@@ -10,7 +10,6 @@ class Dog extends Component {
          return (
          <div>
             <p>Dog cosik ma na imie {this.state.persons[0].name}</p>
-            <p>{this.props.children}</p>
          </div>
          )
     }

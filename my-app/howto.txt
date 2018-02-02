@@ -1,0 +1,14 @@
+1.set PATH=%PATH%;C:\Program Files\OSS\Nodejs691
+2.npm install -g npx
+3.set PATH=%PATH%;C:\Program Files\OSS\Nodejs691\config\npm
+4.create-react-app my-app
+
+
+git config --local http.proxy "http://bartoszj:not4\!YHN@inet-proxy-a.adns.ubs.net:8085"
+git config --local http.sslverify "false"
+
+git config --global --unset http.proxy
+
+
+documentation:
+https://reactjs.org/docs/hello-world.html
