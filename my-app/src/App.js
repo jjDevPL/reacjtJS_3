@@ -16,9 +16,16 @@ class App extends Component {
                 {name:'new name', age:newVal}
             ]
         }) ;
-        console.log('Click: '+newVal);
+        console.log('Button handler: '+newVal);
     }
-
+    nameChangeHandler = (event)=> {
+        this.setState({
+            persons: [
+                {name:event.target.value, age:3333}
+            ]
+        }) ;
+        console.log('Name changeHandler: '+event.target.value);
+    }
 
     tab = [
         1, 2, 3
@@ -30,16 +37,27 @@ class App extends Component {
     }
 
     render() {
+        const style = {
+            backgroundColor :'white',
+            font:'inherit',
+            border: '2px solid blue',
+            padding: '9px',
+            cursor:'pointer'
+        }
+
         return (
             <div className="App">
                 <h1>bla bla alb2</h1>
                 <h2>bla2</h2>
-                <button onClick={() => this.buttonHandler('Arrow')} onKeyDown={this.keyPress}>Button Click</button>
+                <button 
+                style={style}
+                onClick={() => this.buttonHandler('Arrow')} onKeyDown={this.keyPress}>Button Click</button>
                 <Person name='Iwo' age='23'/>
                 <Person
-                    name='Aguska'
+                    name={this.state.persons[0].name}
                     age='4'
                     click={this.buttonHandler.bind(this,'Peron bind clikc')}
+                    changed={this.nameChangeHandler}
                 />
                 <Dog name='Piesek'>
                     <h2>Ch1</h2>
