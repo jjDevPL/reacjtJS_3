@@ -8,7 +8,8 @@ class App extends Component {
         persons: [
             {name: 'bla', age: 'cosik'},
             {name: 'bla2', age: 'cosik2'}
-        ]
+        ],
+        showPersons:false
     }
     buttonHandler = (newVal) => {
         this.setState({
@@ -36,6 +37,11 @@ class App extends Component {
         console.log('Press:' + keyCode.keyCode + 'blabla:' + this.state.persons[0].age);
     }
 
+    togglePersonsHandler = () => {
+        const doesnShow= this.state.showPersons;
+        this.setState({showPersons:!doesnShow});
+    }
+
     render() {
         const style = {
             backgroundColor :'white',
@@ -45,20 +51,29 @@ class App extends Component {
             cursor:'pointer'
         }
 
+        let persons =null;
+        if (this.state.showPersons) {
+            persons = (
+                <div>
+                    <Person name='Iwo' age='23'/>
+                    <Person
+                        name={this.state.persons[0].name}
+                        age='4'
+                        click={this.buttonHandler.bind(this,'Peron bind clikc')}
+                        changed={this.nameChangeHandler}
+                    />
+                </div>
+            );
+        }
+
         return (
             <div className="App">
                 <h1>bla bla alb2</h1>
                 <h2>bla2</h2>
                 <button 
                 style={style}
-                onClick={() => this.buttonHandler('Arrow')} onKeyDown={this.keyPress}>Button Click</button>
-                <Person name='Iwo' age='23'/>
-                <Person
-                    name={this.state.persons[0].name}
-                    age='4'
-                    click={this.buttonHandler.bind(this,'Peron bind clikc')}
-                    changed={this.nameChangeHandler}
-                />
+                onClick={this.togglePersonsHandler} onKeyDown={this.keyPress}>Toggle Button</button>
+               {persons}
                 <Dog name='Piesek'>
                     <h2>Ch1</h2>
                     <h2>{this.state.persons[0].age}</h2>
