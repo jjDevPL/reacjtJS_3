@@ -6,19 +6,19 @@ import Dog from './Person/Dog'
 class App extends Component {
     state = {
         persons: [
-            {name: 'bla', age: 'cosik'},
-            {name: 'bla2', age: 'cosik2'}
+            {id:'1',name: 'bla', age: 'cosik'},
+            {id:'2',name: 'bla2', age: 'cosik2'}
         ],
         showPersons:false
     }
-    buttonHandler = (newVal) => {
+   /* buttonHandler = (newVal) => {
         this.setState({
             persons: [
                 {name:'new name', age:newVal}
             ]
         }) ;
         console.log('Button handler: '+newVal);
-    }
+    }*/
     nameChangeHandler = (event)=> {
         this.setState({
             persons: [
@@ -41,6 +41,12 @@ class App extends Component {
         const doesnShow= this.state.showPersons;
         this.setState({showPersons:!doesnShow});
     }
+    deletePersonHandler = (personIndex) => {
+        // const persons= this.state.persons.slice;
+        const persons =[...this.state.persons];
+        persons.splice(personIndex,1);
+        this.setState({persons:persons});
+    }
 
     render() {
         const style = {
@@ -54,14 +60,23 @@ class App extends Component {
         let persons =null;
         if (this.state.showPersons) {
             persons = (
+                //function person is called of very element of state persons
+              
                 <div>
-                    <Person name='Iwo' age='23'/>
+                      {this.state.persons.map((person,index)=> {
+                            return <Person 
+                            key={person.id}
+                            name={person.name} 
+                            age={person.age} 
+                            click={ () => this.deletePersonHandler(index)}/>
+                        })}
+                  {/*   < Person name='Iwo' age='23'/>
                     <Person
                         name={this.state.persons[0].name}
                         age='4'
                         click={this.buttonHandler.bind(this,'Peron bind clikc')}
                         changed={this.nameChangeHandler}
-                    />
+                    /> */}
                 </div>
             );
         }
